@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado La Hermelinda - Proyecto Ambiental</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background:linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(100, 161, 103, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgb(1, 1, 1);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #a8e6cf;
+        }
+
+        /* Hero Section */
+        .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: rgb(3, 3, 3);
+        overflow: hidden;
+        background: linear-gradient(rgba(39, 174, 96, 0.7), rgba(46, 204, 113, 0.7)); /* degradado de fondo */
+        }
+
+        .hero::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: url('hermelinda.jpg') center center / cover no-repeat;
+        z-index: 2; /* imagen por encima del degradado */
+        opacity: 1;
+        }
+
+        .hero-content {
+        position: relative;
+        z-index: 3;
+        background: rgba(203, 252, 174, 0.596); /* fondo oscuro semi-transparente */
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 800px;
+        margin: 0 auto;
+        backdrop-filter: blur(3px); /* opcional: desenfoca el fondo */
+        } 
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #8d6e63;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            background: #f1f8e9;
+        }
+
+        section:nth-child(even) {
+            background: #e8f5e8;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #4caf50;
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #4caf50;
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Causes and Consequences */
+        .causes-consequences {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .causes, .consequences {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .causes {
+            border-left: 5px solid #8d6e63;
+        }
+
+        .consequences {
+            border-left: 5px solid #03a9f4;
+        }
+
+        .causes h3, .consequences h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .causes ul, .consequences ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .causes li, .consequences li {
+            padding: 0.5rem 0;
+            border-left: 3px solid #4caf50;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Media Gallery Section */
+        .media-section {
+            background: #e8f5e8;
+            padding: 80px 0;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .media-button {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            color: #2e7d32;
+        }
+
+        .media-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .media-button.pdf {
+            border-left: 5px solid #4caf50;
+        }
+
+        .media-button.video {
+            border-left: 5px solid #03a9f4;
+        }
+
+        .media-button .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-button h3 {
+            margin-bottom: 0.5rem;
+            color: #2e7d32;
+        }
+
+        .media-button p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Solutions */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, hsl(162, 86%, 69%), #70e7d7);
+            color: rgb(20, 20, 20);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-left: 5px solid #4caf50;
+        }
+
+        .team-member h4 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            height: 90vh;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .causes-consequences {
+                grid-template-columns: 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🏪 Mercado La Hermelinda</div>
+            <ul class="nav-links">
+                <li><a href="#problema">Problema</a></li>
+                <li><a href="#causas">Causas</a></li>
+                <li><a href="#multimedia">Multimedia</a></li>
+                <li><a href="#soluciones">Soluciones</a></li>
+                <li><a href="#equipo">Equipo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="floating">Proyecto Ambiental</h1>
+            <p>Acumulación de basura en el Mercado La Hermelinda de Trujillo y su impacto en el ambiente y la salud pública</p>
+            <a href="#problema" class="cta-button">Explorar Investigación</a>
+        </div>
+    </section>
+
+    <section id="problema" class="container">
+        <h2 class="section-title fade-in">Definición del Problema</h2>
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <div class="icon">🗑️</div>
+                <h3>Acumulación de Residuos</h3>
+                <p>La acumulación de desechos en el Mercado La Hermelinda representa un serio problema para el medio ambiente y la salud pública, surgiendo por el desecho de residuos orgánicos e inorgánicos.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="icon">🌍</div>
+                <h3>Impacto Ambiental</h3>
+                <p>Los mercados se transforman en focos de contaminación multifactorial, afectando el suelo por filtración de lixiviados, el agua por escurrimiento de residuos y el aire por emisión de gases.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="icon">🏥</div>
+                <h3>Salud Pública</h3>
+                <p>Las condiciones insalubres favorecen la presencia de roedores e insectos, vectores de enfermedades infecciosas, representando un riesgo constante para comerciantes y compradores.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="causas" class="container">
+        <h2 class="section-title fade-in">Causas y Consecuencias</h2>
+        <div class="causes-consequences">
+            <div class="causes fade-in">
+                <h3>🔍 Causas Principales</h3>
+                <h4>Directas:</h4>
+                <ul>
+                    <li>Hábitos de consumo irresponsables</li>
+                    <li>Falta de educación ambiental</li>
+                    <li>Tirar basura en la vía pública</li>
+                    <li>No separar residuos en origen</li>
+                    <li>Falta de contenedores adecuados</li>
+                </ul>
+                <h4>Indirectas:</h4>
+                <ul>
+                    <li>Poca fiscalización municipal</li>
+                    <li>Falta de campañas de sensibilización</li>
+                    <li>Crecimiento desorganizado del comercio</li>
+                    <li>Cultura de indiferencia ambiental</li>
+                </ul>
+            </div>
+            <div class="consequences fade-in">
+                <h3>⚠️ Consecuencias</h3>
+                <h4>Ambientales:</h4>
+                <ul>
+                    <li>Contaminación del suelo, aire y agua</li>
+                    <li>Degradación del entorno urbano</li>
+                    <li>Deterioro de la calidad ambiental</li>
+                </ul>
+                <h4>Sanitarias:</h4>
+                <ul>
+                    <li>Incremento de plagas urbanas</li>
+                    <li>Riesgo de enfermedades infecciosas</li>
+                    <li>Afectación directa en la salud</li>
+                </ul>
+                <h4>Sociales y Económicas:</h4>
+                <ul>
+                    <li>Reducción del flujo de clientes</li>
+                    <li>Pérdida económica para comerciantes</li>
+                    <li>Mayor gasto público en limpieza</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="multimedia" class="media-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Galería Multimedia</h2>
+            
+            <h3 style="text-align: center; margin-bottom: 2rem; color: #2e7d32;">📄 Documentos de Investigación</h3>
+            <div class="media-grid">
+                <button class="media-button pdf fade-in" onclick="openModal('https://drive.google.com/file/d/1KSsO6toyA7nQgIxMr8PeJ4hakM2bl82d/preview')">
+                    <div class="icon">🌍</div>
+                    <h3>Problematica Socioambiental</h3>
+                    <p>Ubicación y contexto del Mercado La Hermelinda</p>
+                </button>
+                
+                <button class="media-button pdf fade-in" onclick="openModal('https://drive.google.com/file/d/1Fyam9rIGFl5sw54jsHeN2M2fRZPzsQ0g/preview')">
+                    <div class="icon">🗺️</div>
+                    <h3>Mapa de Contexto</h3>
+                    <p>Ruta de investigación y puntos de análisis</p>
+                </button>
+                
+                <button class="media-button pdf fade-in" onclick="openModal('https://drive.google.com/file/d/1QumlxpY-6mZUbs-efH-PeH2fWqjWF4Mb/preview')">
+                    <div class="icon">📖</div>
+                    <h3>Narracion del problema</h3>
+                    <p>Recopilación visual de la problemática</p>
+                </button>
+                
+                <button class="media-button pdf fade-in" onclick="openModal('https://drive.google.com/file/d/1VqfGkVnxdCLzmDHOrdHL63GiUIwWvJxd/preview')">
+                    <div class="icon">🛤️</div>
+                    <h3>Mapa de recorrido</h3>
+                    <p>Secuencia narrativa del proyecto</p>
+                </button>
+            </div>
+
+            <h3 style="text-align: center; margin: 4rem 0 2rem 0; color: #2e7d32;">🎥 Videos Explicativos</h3>
+            <div class="media-grid">
+                <button class="media-button video fade-in" onclick="openModal('https://drive.google.com/file/d/1nYuIwKs5oQ8lSirnW-s31gJjrjVHWdIs/preview')">
+                    <div class="icon">📺</div>
+                    <h3>Spot Publicitario</h3>
+                    <p>Análisis del impacto ambiental y social</p>
+                </button>
+                
+                <button class="media-button video fade-in" onclick="openModal('https://drive.google.com/file/d/1Gbmky3dwmrpYOFbDY9j_BGm6pISq13_o/preview')">
+                    <div class="icon">🖼️</div>
+                    <h3>Collage</h3>
+                    <p>Explicación detallada de la situación</p>
+                </button>
+                
+                <button class="media-button video fade-in" onclick="openModal('https://drive.google.com/file/d/1FkaxLANlQFvgh09TV-OSwsOxEoZHcMRd/preview')">
+                    <div class="icon">🎭</div>
+                    <h3>Juego de Roles</h3>
+                    <p>Campaña de concientización</p>
+                </button>
+                
+                <button class="media-button video fade-in" onclick="openModal('https://drive.google.com/file/d/1-w7Gs5x8Cnra5gEZ8BptDhA9F0VUGiPg/preview')">
+                    <div class="icon">📋</div>
+                    <h3>StoryBoard</h3>
+                    <p>Dramatización de la problemática</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="soluciones" class="container">
+        <h2 class="section-title fade-in">Alternativas de Solución</h2>
+        <div class="solutions-grid">
+            <div class="solution-card fade-in">
+                <div class="icon">🗂️</div>
+                <h3>Contenedores Clasificados</h3>
+                <p>Instalación de contenedores de basura clasificados para separación adecuada de residuos orgánicos e inorgánicos.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="icon">🌱</div>
+                <h3>Programa de Compostaje</h3>
+                <p>Implementación de un programa de compostaje con los desechos orgánicos del mercado para crear abono natural.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="icon">🎓</div>
+                <h3>Capacitación y Concientización</h3>
+                <p>Realización de campañas de capacitación y concientización para comerciantes y visitantes del mercado.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="icon">👥</div>
+                <h3>Brigadas Ecológicas</h3>
+                <p>Formación de brigadas ecológicas entre comerciantes para supervisar la limpieza y mantenimiento del mercado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="container">
+        <h2 class="section-title fade-in">Nuestro Equipo</h2>
+        <div class="team-grid">
+            <div class="team-member fade-in">
+                <h4>Anthony Eduardo Cardenas Baltodano</h4>
+                <p>Investigador</p>
+            </div>
+            <div class="team-member fade-in">
+                <h4>Gregory Joshep Castillo Abad</h4>
+                <p>Investigador</p>
+            </div>
+            <div class="team-member fade-in">
+                <h4>Connie Yamile Odar Becerra</h4>
+                <p>Investigadora</p>
+            </div>
+            <div class="team-member fade-in">
+                <h4>Cesar Alexander Ramos Marceliano</h4>
+                <p>Investigador</p>
+            </div>
+            <div class="team-member fade-in">
+                <h4>Sarita Claribel Rodríguez Asunción</h4>
+                <p>Investigadora</p>
+            </div>
+            <div class="team-member fade-in">
+                <h4>Cristina Tatiana Rodríguez Corrales</h4>
+                <p>Investigadora</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="modalFrame" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Proyecto Mercado La Hermelinda - Actividades Integradoras III: Expresión Transformadora</p>
+            <p>Docente: Mariano Segundo Cosio Zamora</p>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('mediaModal');
+        const modalFrame = document.getElementById('modalFrame');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        function openModal(url) {
+            modalFrame.src = url;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+            modalFrame.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                modalFrame.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(46, 125, 50, 0.98)';
+            } else {
+                header.style.background = 'rgba(46, 125, 50, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
